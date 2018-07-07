@@ -2,7 +2,7 @@
 <PMML xmlns="http://www.dmg.org/PMML-4_3" xmlns:data="http://jpmml.org/jpmml-model/InlineTable" version="4.3">
 	<Header>
 		<Application name="JPMML-SparkML" version="1.4.5"/>
-		<Timestamp>2018-07-07T09:14:40Z</Timestamp>
+		<Timestamp>2018-07-07T16:39:22Z</Timestamp>
 	</Header>
 	<DataDictionary>
 		<DataField name="Adjusted" optype="categorical" dataType="string">
@@ -35,22 +35,22 @@
 	<MiningModel functionName="classification" algorithmName="XGBoost" x-mathContext="float">
 		<MiningSchema>
 			<MiningField name="Adjusted" usageType="target"/>
-			<MiningField name="Deductions"/>
 			<MiningField name="Hours"/>
-			<MiningField name="Gender"/>
 			<MiningField name="Age"/>
+			<MiningField name="Gender"/>
 			<MiningField name="Income"/>
+			<MiningField name="Deductions"/>
 		</MiningSchema>
 		<Segmentation multipleModelMethod="modelChain">
 			<Segment id="1">
 				<True/>
 				<MiningModel functionName="regression" x-mathContext="float">
 					<MiningSchema>
-						<MiningField name="Deductions"/>
 						<MiningField name="Hours"/>
-						<MiningField name="Gender"/>
 						<MiningField name="Age"/>
+						<MiningField name="Gender"/>
 						<MiningField name="Income"/>
+						<MiningField name="Deductions"/>
 					</MiningSchema>
 					<Output>
 						<OutputField name="xgbValue" optype="continuous" dataType="float" feature="predictedValue" isFinalResult="false"/>

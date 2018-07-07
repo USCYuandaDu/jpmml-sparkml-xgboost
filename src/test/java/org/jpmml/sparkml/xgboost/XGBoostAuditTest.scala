@@ -19,7 +19,13 @@ object XGBoostAuditTest {
       .getOrCreate()
     var df = sparkSession.sqlContext.read.option("header", "true").option("inferSchema", "true").csv("csv/Audit.csv")
     df = df.withColumn("AdjustedTmp", df("Adjusted").cast(StringType)).drop("Adjusted").withColumnRenamed("AdjustedTmp", "Adjusted")
-
+    var index = 0
+    df.select("age", "Education").columns.map(col => {
+      df.groupBy(col).count().show()
+      index += 1
+    })
+    println(index)
+    //df.groupBy("age").count().show()
     val formula = new RFormula().setFormula("Adjusted ~ Age + Income + Gender + Deductions + Hours")
 
     var estimator = new XGBoostEstimator(Map("objective" -> "binary:logistic"))
